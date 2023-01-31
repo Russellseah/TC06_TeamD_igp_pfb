@@ -1,36 +1,55 @@
 import csv
 from pathlib import Path
 
-def overheads_function():
-    # Assigning a variable to file path of current working directory 
-    file_path = Path.cwd()/"igp_pfb"/"csv_reports"/"overheads.csv"
-    # Assigning a variable to file path of directory that would be appended
-    fp_summary = Path.cwd()/"igp_pfb"/"summary_report.txt"
-    
-    # Initialize variables to store max overheads value and category
-    max_overheads = 0
-    max_category = ""
+def profitloss_function():
+    """
+    When function is executed, the program will compute the difference in net profit between each day.
+    It would return NET PROFIT SURPLUS or PROFIT DEFICIT depending on the values. If deficit is equal to 0, 
+    It would return NET PROFIT SURPLUS, otherwise it would return CASH DEFICIT. 
+    """
+    fp_summary = Path.cwd()/"igp_pfb"/"summary_report.txt" 
+    file_path = Path.cwd()/"igp_pfb"/"csv_reports"/"profit-and-loss.csv"
 
-    # Opening file in read mode with encoding "UTF-8" 
+    # Creates two variables assigns the value zero
+    increment = 0
+    shortage = 0
+
+    # Creates an empty list 
+    profitloss = []
+    # Opening file in read mode with encoding "UTF-8"
     with file_path.open(mode = "r", encoding = "UTF-8", newline = "") as file:
-        # Instantiate a reader object
         reader = csv.reader(file)
-        # Use 'next()' to skip the header
+        # Use 'next()' to skip the header 
         next(reader)
-        # Iterate over the lines of the csv file (processes each line)
-        for line in reader:
-            # Assigns float value to overheads
-            overheads = float(line[1])
-            # Check if overheads is greater than max_overheads, if yes update max_overheads and max_category
-            if overheads > max_overheads:
-                max_overheads = overheads
-                max_category = line[0]
 
-    # Opening file in append mode with encoding "UTF-8" 
-    with fp_summary.open(mode = "a", encoding = "UTF-8", newline = "") as file:
-        # Assigning the variable message to the final statement that is meant to be displayed on the final text file
-        message = f"[HIGHEST OVERHEADS] {max_category}: {max_overheads}%"
-        # Writing data to the final text file in uppercase
-        file.write(message.upper())
-    # Use '.close()' to close a file
-    file.close()
+        for value in reader:
+            profitloss.append(value)
+            # Returns the number of items in an object, profitloss
+            length = len(profitloss)
+            # Iterates thorugh all the days 
+            while increment + 1 < length:
+                # Creates two variables and assigns values for previous day and current day 
+                coverted1 = int((profitloss[increment][4]))
+                coverted2 = int(profitloss[increment + 1][4])
+                # Condition: Checks if current day is lesser than previous day 
+                condition = coverted1 >  coverted2
+                if condition: 
+                    # Assigns the difference in values to deficit 
+                    shortage = coverted1 - coverted2
+                    # Opening file in append mode with encoding "UTF-8"
+                    with fp_summary.open(mode="a", encoding = "UTF-8", newline = "") as file:
+                        # Message to be appended on to the file
+                        message = f"\n[PROFIT DEFICIT] DAY: {profitloss[increment + 1][0]}, AMOUNT: USD{(shortage)}"
+                        file.write(message)   
+                        # Closes the files    
+                        file.close()
+                # Adding one on every iteration
+                increment += 1
+            # if deficit equals to 0 
+            if shortage == 0:
+                # Opening file in append mode with encoding "UTF-8"
+                with fp_summary.open(mode="a", encoding = "UTF-8", newline = "") as file:
+                    message = f"\n[NET PROFIT SURPLUS] net profit on each day is higher than the previous day"
+                    file.write(message.upper())
+                    # Closes the fp_summary file 
+                    file.close()
