@@ -2,6 +2,9 @@ import csv
 from pathlib import Path
 
 def overheads_function():
+    """
+    When function is executed, the program will compute the highest overhead category and its percentage.
+    """
     # Assigning a variable to file path of current working directory 
     file_path = Path.cwd()/"igp_pfb"/"csv_reports"/"overheads.csv"
     # Assigning a variable to file path of directory that would be appended
