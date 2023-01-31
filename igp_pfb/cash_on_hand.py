@@ -31,7 +31,7 @@ def coh_function():
         length = len(cash_on_hand)
         # Iterates through one line and then the next line after first round of iteration. 
         while increment + 1 < length: 
-            # Creates two variables, value1 & value2 assinging values of previous and current day
+            # Creates two variables, value1 & value2 assigning values of previous and current day
             value1 = int((cash_on_hand[increment][1]))
             value2 = int(cash_on_hand[increment + 1][1])
             # Checks if previous day value is greater than current day
