@@ -5,7 +5,7 @@ def profitloss_function():
     """
     When function is executed, the program will compute the difference in net profit between each day.
     It would return NET PROFIT SURPLUS or PROFIT DEFICIT depending on the values. If deficit is equal to 0, 
-    It would return NET PROFIT SURPLUS, otherwise it would return CASH DEFICIT. 
+    It would return NET PROFIT SURPLUS, otherwise it would return PROFIT DEFICIT. 
     """
     fp_summary = Path.cwd()/"igp_pfb"/"summary_report.txt" 
     file_path = Path.cwd()/"igp_pfb"/"csv_reports"/"profit-and-loss.csv"
@@ -49,7 +49,7 @@ def profitloss_function():
             if shortage == 0:
                 # Opening file in append mode with encoding "UTF-8"
                 with fp_summary.open(mode="a", encoding = "UTF-8", newline = "") as file:
-                    message = f"\n[NET PROFIT SURPLUS] net profit on each day is higher than the previous day"
+                    message = f"\n[NET PROFIT SURPLUS] net profit is higher than the previous day"
                     file.write(message.upper())
                     # Closes the fp_summary file 
                     file.close()
