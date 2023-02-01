@@ -45,11 +45,11 @@ def profitloss_function():
                         file.close()
                 # Adding one on every iteration
                 increment += 1
-            # if deficit equals to 0 
+            # if increment equals to 0 
         if increment == 0:
                 # Opening file in append mode with encoding "UTF-8"
             with fp_summary.open(mode="a", encoding = "UTF-8", newline = "") as file:
-                message = f"\n[NET PROFIT SURPLUS] net profit is higher than the previous day"
+                message = f"\n[NET PROFIT SURPLUS] net profit on each day is higher than the previous day"
                 file.write(message.upper())
                 # Closes the fp_summary file 
                 file.close()
