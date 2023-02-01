@@ -4,7 +4,7 @@ from pathlib import Path
 def profitloss_function():
     """
     When function is executed, the program will compute the difference in net profit between each day.
-    It would return NET PROFIT SURPLUS or PROFIT DEFICIT depending on the values. If deficit is equal to 0, 
+    It would return NET PROFIT SURPLUS or PROFIT DEFICIT depending on the values. If increment is equal to 0, 
     It would return NET PROFIT SURPLUS, otherwise it would return PROFIT DEFICIT. 
     """
     fp_summary = Path.cwd()/"igp_pfb"/"summary_report.txt" 
