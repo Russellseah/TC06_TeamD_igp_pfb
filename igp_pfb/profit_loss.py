@@ -29,13 +29,13 @@ def profitloss_function():
             # Iterates thorugh all the days 
             while increment + 1 < length:
                 # Creates two variables and assigns values for previous day and current day 
-                coverted1 = int((profitloss[increment][4]))
-                coverted2 = int(profitloss[increment + 1][4])
+                converted1 = int((profitloss[increment][4]))
+                converted2 = int(profitloss[increment + 1][4])
                 # Condition: Checks if current day is lesser than previous day 
-                condition = coverted1 >  coverted2
+                condition = converted1 >  converted2
                 if condition: 
                     # Assigns the difference in values to deficit 
-                    shortage = coverted1 - coverted2
+                    shortage = converted1 - converted2
                     # Opening file in append mode with encoding "UTF-8"
                     with fp_summary.open(mode="a", encoding = "UTF-8", newline = "") as file:
                         # Message to be appended on to the file
